@@ -1,0 +1,47 @@
+root = "."
+testdata_dir = "testdata"
+tmp_dir = "tmp"
+
+[build]
+  # Perintah untuk compile aplikasi 
+  cmd = "go build -o ./tmp/main ."
+  
+  # Binary yang dihasilkan setelah compile
+  bin = "./tmp/main"
+  
+  # Jalankan binary dengan argumen tambahan jika perlu
+  full_bin = "./tmp/main"
+  
+  # Pantau file dengan ekstensi berikut
+  include_ext = ["go", "env"]
+  
+  # Abaikan folder-folder ini agar tidak memicu reload terus-menerus (penting untuk performa)
+  exclude_dir = ["tmp", "testdata"]
+  
+  # Abaikan file spesifik
+  exclude_file = []
+  
+  # Beri jeda sedikit agar tidak langsung compile saat kamu baru mengetik satu huruf (ms)
+  delay = 1000
+  
+  # Hentikan proses build jika ada error
+  stop_on_error = true
+  
+  # Kirim sinyal terminate ke aplikasi (Sangat penting untuk Graceful Shutdown di Fiber)
+  send_interrupt = true
+  
+  # Jangan bunuh proses lama jika build gagal
+  kill_delay = 500
+
+[log]
+  time = true
+
+[color]
+  main = "magenta"
+  watcher = "cyan"
+  build = "yellow"
+  runner = "green"
+
+[misc]
+  # Bersihkan file tmp saat Air dimatikan
+  clean_on_exit = true
