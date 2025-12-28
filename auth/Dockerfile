@@ -6,6 +6,13 @@ RUN apk add --no-cache git
 COPY go.mod go.sum ./
 RUN go mod download
 
+FROM base AS dev
+RUN go install github.com/air-verse/air@latest
+
+COPY . .
+CMD ["air", "-c", ".air.toml"]
+
+FROM base AS builder
 COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o /main main.go
